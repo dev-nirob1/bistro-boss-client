@@ -1,6 +1,23 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../ContextProvider/Provider";
 
 const Navbar = () => {
+    const {user, logout} = useContext(AuthContext)
+    const handleLogOut = () =>{
+        logout()
+        .then(()=>{})
+        .catch(error => console.log(error.message))
+    }
+    const navLinks = <>
+        <li><Link to="/">Home</Link></li>
+
+        <li><Link to="/menu">Menu</Link></li>
+        <li><Link to="/order/salads">Order</Link></li>
+        {
+          user? <><button onClick={handleLogOut} className="px-3 py-2 bg-orange-600 ">LogOut</button></> : <><li><Link to="/login">Login</Link></li></>
+        }
+    </>
     return (
         <div className="navbar fixed bg-black z-10 text-white mx-auto container opacity-20">
             <div className="navbar-start">
@@ -10,18 +27,15 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><a>Home</a></li>
-                        <li>About</li>
-                        <li><a>Menu</a></li>
+                        <li>Menu</li>
+                        <li><a>Order</a></li>
                     </ul>
                 </div>
                 <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
             </div>
             <div className="navbar-center hidden text-white lg:flex">
                 <ul className="menu z-30 menu-horizontal px-1">
-                    <li><Link to="/">Home</Link></li>
-                    
-                    <li><Link to="/menu">Menu</Link></li>
-                    <li><Link to="/order">Order</Link></li>
+                    {navLinks}
                 </ul>
             </div>
             <div className="navbar-end">
