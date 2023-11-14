@@ -1,13 +1,19 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../ContextProvider/Provider';
+import GoogleLogin from '../Shared/GoogleLogin/GoogleLogin';
 
 const Login = () => {
-    const {signIn} = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const captchaRef = useRef(null);
     const [disable, setDisable] = useState(true)
+
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -18,11 +24,12 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         signIn(email, password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser)
-        })
-        .catch(error => console.log(error))
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.log(error))
     }
     const captchaValidate = () => {
         const user_captcha_value = captchaRef.current.value;
@@ -74,6 +81,9 @@ const Login = () => {
                                 <input disabled={disable} type="submit" value="Login" className="btn btn-primary" />
                             </div>
                         </form>
+                       <div className='mx-auto mb-5'>
+                       <GoogleLogin/>
+                       </div>
                     </div>
                 </div>
             </div>
