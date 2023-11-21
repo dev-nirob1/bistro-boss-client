@@ -3,11 +3,13 @@ import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import SectionTitle from "../../../../Components/SectionTiltle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
+    const [axiosSecure] = useAxiosSecure()
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users')
-        return res.json()
+        const res = await axiosSecure.get('/users')
+        return res.data
     });
 
     const handleMakeAdmin = id => {
@@ -28,7 +30,20 @@ const AllUsers = () => {
     }
 
     const handleDeleteUser = id => {
-        console.log(id)
+        fetch(`http://localhost:5000/users/${id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            refetch()
+            if(data.deletedCount){
+                Swal.fire(
+                    'Good job!',
+                    'User Deleted',
+                    'success'
+                )
+            }
+        })
     }
 
     return (

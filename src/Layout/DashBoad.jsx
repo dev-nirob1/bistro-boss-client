@@ -2,10 +2,12 @@ import { FaBars, FaBook, FaCalendarAlt, FaCalendarPlus, FaCartPlus, FaCommentDot
 import { ImSpoonKnife } from "react-icons/im";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const DashBoad = () => {
     const [cart] = useCart()
-    const isAdmin = true;
+    const isAdmin = useAdmin();
+    console.log(isAdmin)
 
     return (
         <div className="drawer lg:drawer-open bg-gray-50">
@@ -24,7 +26,7 @@ const DashBoad = () => {
                     {/* /* Sidebar content here */}
 
                     {
-                        isAdmin ? <>
+                        isAdmin === true ? <>
                             <li className="uppercase md:text-lg">
                                 <NavLink to="/"><FaHome /> Admin Home</NavLink>
                             </li>
