@@ -6,7 +6,7 @@ import useAdmin from "../hooks/useAdmin";
 
 const DashBoad = () => {
     const [cart] = useCart()
-    const isAdmin = useAdmin();
+    const [isAdmin] = useAdmin();
     console.log(isAdmin)
 
     return (
@@ -26,17 +26,17 @@ const DashBoad = () => {
                     {/* /* Sidebar content here */}
 
                     {
-                        isAdmin === true ? <>
+                        isAdmin ? <>
                             <li className="uppercase md:text-lg">
                                 <NavLink to="/"><FaHome /> Admin Home</NavLink>
                             </li>
 
                             <li className="uppercase md:text-lg">
-                                <NavLink to="/reservation"><ImSpoonKnife /> Add item</NavLink>
+                                <NavLink to="/dashboard/add-item"><ImSpoonKnife /> Add item</NavLink>
                             </li>
 
                             <li className="uppercase md:text-lg">
-                                <NavLink to="/payment-history"> <FaBars/> manage items</NavLink>
+                                <NavLink to="/dashboard/payment-history"> <FaBars/> manage items</NavLink>
                             </li>
                             <li className="uppercase md:text-lg">
                                 <NavLink to="/dashboard/mycart"><FaBook />
