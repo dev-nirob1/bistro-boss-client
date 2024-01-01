@@ -48,7 +48,7 @@ const Provider = ({ children }) => {
                     email: currentUser.email
                 })
                 .then(data => {
-                    console.log(data.data.token)
+                    // console.log(data.data.token)
                     localStorage.setItem('access-token', data.data.token)
                     setLoading(false)
                 })

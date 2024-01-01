@@ -11,7 +11,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         logout()
             .then(() => { })
-            .catch(error => console.log(error.message))
+            .catch(error => {console.log(error.message)})
     }
     const navLinks = <>
         <li><Link to="/">Home</Link></li>

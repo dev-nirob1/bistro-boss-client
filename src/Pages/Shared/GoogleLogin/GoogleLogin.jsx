@@ -13,7 +13,9 @@ const GoogleLogin = () => {
         googleLogin()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                if(loggedUser){
+                    alert('Welcome to Bistro Boss')
+                }
                 const savedUser = { name: loggedUser.displayName, email: loggedUser.email }
                 fetch('http://localhost:5000/users', {
                     method: 'POST',

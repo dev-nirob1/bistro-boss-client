@@ -26,10 +26,13 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                if(loggedUser){
+                    alert('Welcome to Bistro Boss')
+                }
+                // console.log(loggedUser)
                 navigate(from, { replace: true });
             })
-            .catch(error => console.log(error))
+            // .catch(error => console.log(error))
     }
     const captchaValidate = () => {
         const user_captcha_value = captchaRef.current.value;

@@ -17,7 +17,9 @@ const Register = () => {
 
       .then(result => {
         const loggedUser = result.user;
-        console.log(loggedUser)
+        if(loggedUser){
+          alert('Welcome to Bistro Boss')
+      }
         updateUserProfile(data.name, data.photoURL)
 
           .then(() => {

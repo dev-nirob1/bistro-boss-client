@@ -7,7 +7,6 @@ import useAdmin from "../hooks/useAdmin";
 const DashBoad = () => {
     const [cart] = useCart()
     const [isAdmin] = useAdmin();
-    console.log(isAdmin)
 
     return (
         <div className="drawer lg:drawer-open bg-gray-50">

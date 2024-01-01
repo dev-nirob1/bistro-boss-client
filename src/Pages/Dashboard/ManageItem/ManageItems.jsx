@@ -10,7 +10,6 @@ const ManageItems = () => {
     const [axiosSecure] = useAxiosSecure()
 
     const handleDelete = id => {
-        console.log(id)
         axiosSecure.delete(`/menu/${id}`)
             .then(res => {
                 if (res.data.deletedCount > 0) {

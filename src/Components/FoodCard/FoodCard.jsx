@@ -6,17 +6,16 @@ import useCart from "../../hooks/useCart";
 
 const FoodCard = ({ item }) => {
     const { name, image, recipe, price, _id } = item;
-     const {user} = useContext(AuthContext)
-     const [, refetch] = useCart()
-     const navigate = useNavigate()
-     const location = useLocation()
+    const { user } = useContext(AuthContext)
+    const [, refetch] = useCart()
+    const navigate = useNavigate()
+    const location = useLocation()
 
 
     const handleAddToCart = item => {
 
-        console.log(item)
-        if(user && user.email){
-            const cartItem = {menuItemId: _id, name, image, price, email: user.email}
+        if (user && user.email) {
+            const cartItem = { menuItemId: _id, name, image, price, email: user.email }
             fetch('http://localhost:5000/carts', {
                 method: 'POST',
                 headers: {
@@ -24,22 +23,23 @@ const FoodCard = ({ item }) => {
                 },
                 body: JSON.stringify(cartItem)
             })
-            .then(res => res.json())
-            .then(data => {
-                if(data.insertedId){
-                    refetch()
-                    Swal.fire({
-                        title: 'Added to Cart',
-                        showClass: {
-                          popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                          popup: 'animate__animated animate__fadeOutUp'
-                        }
-                      })
-                }})
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch()
+                        Swal.fire({
+                            title: `${item.name}Added to Cart`,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        })
+                    }
+                })
         }
-        else{
+        else {
             Swal.fire({
                 title: 'Please login if you want to add cart?',
                 icon: 'warning',
@@ -47,11 +47,11 @@ const FoodCard = ({ item }) => {
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Login'
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/login', {state: {from: location}})
+                    navigate('/login', { state: { from: location } })
                 }
-              })
+            })
         }
     }
 
@@ -65,7 +65,7 @@ const FoodCard = ({ item }) => {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions">
-                    <button onClick={()=> handleAddToCart(item)} className="btn btn-primary">Add to Cart</button>
+                    <button onClick={() => handleAddToCart(item)} className="btn btn-primary">Add to Cart</button>
                 </div>
             </div>
         </div>
