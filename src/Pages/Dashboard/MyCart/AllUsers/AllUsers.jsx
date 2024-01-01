@@ -30,20 +30,20 @@ const AllUsers = () => {
     }
 
     const handleDeleteUser = id => {
-        fetch(`http://localhost:5000/users/${id}`,{
+        fetch(`http://localhost:5000/users/${id}`, {
             method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(data => {
-            refetch()
-            if(data.deletedCount){
-                Swal.fire(
-                    'Good job!',
-                    'User Deleted',
-                    'success'
-                )
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                if (data.deletedCount) {
+                    Swal.fire(
+                        'Good job!',
+                        'User Deleted',
+                        'success'
+                    )
+                }
+            })
     }
 
     return (

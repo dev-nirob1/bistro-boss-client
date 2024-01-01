@@ -36,10 +36,10 @@ const DashBoad = () => {
                             </li>
 
                             <li className="uppercase md:text-lg">
-                                <NavLink to="/dashboard/payment-history"> <FaBars/> manage items</NavLink>
+                                <NavLink to="/dashboard/manageItems"> <FaBars/> manage items</NavLink>
                             </li>
                             <li className="uppercase md:text-lg">
-                                <NavLink to="/dashboard/mycart"><FaBook />
+                                <NavLink to="/dashboard/manage-bookings"><FaBook />
                                     manage bookings
                                 </NavLink>
                             </li>
